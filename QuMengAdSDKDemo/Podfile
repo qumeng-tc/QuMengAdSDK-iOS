@@ -1,0 +1,29 @@
+# Uncomment the next line to define a global platform for your project
+# use_frameworks!
+
+platform :ios, '11.0'
+
+target 'QuMengAdSDKDemo' do
+  pod "QuMengAdSDK", path: "../QuMengAdSDK"
+  
+  pod 'Masonry'
+  pod 'MBProgressHUD'
+  pod 'DoraemonKit'
+  pod 'DoraemonKit'
+  pod 'YYWebImage'
+end
+
+
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_WARN_DOCUMENTATION_COMMENTS'] = 'NO'
+        config.build_settings['WARNING_CFLAGS'] ||= ['-Wno-nullability-completeness -Wno-documentation'] #忽略文档和nullability警告
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES' #第三方忽略警告
+      end
+    end
+  end
+end
+

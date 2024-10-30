@@ -1,0 +1,683 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		84036C2B2CA64FE600F94917 /* QuMengFeedAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036BFB2CA64FE600F94917 /* QuMengFeedAdCell.m */; };
+		84036C2C2CA64FE600F94917 /* QuMengFeedDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036BFD2CA64FE600F94917 /* QuMengFeedDemoViewController.m */; };
+		84036C2D2CA64FE600F94917 /* QuMengInterstitialConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C002CA64FE600F94917 /* QuMengInterstitialConf.m */; };
+		84036C2E2CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C032CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m */; };
+		84036C2F2CA64FE600F94917 /* QuMengNativeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C052CA64FE600F94917 /* QuMengNativeCell.m */; };
+		84036C302CA64FE600F94917 /* QuMengNativeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C072CA64FE600F94917 /* QuMengNativeDemoViewController.m */; };
+		84036C312CA64FE600F94917 /* QuMengNativeSingleImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C092CA64FE600F94917 /* QuMengNativeSingleImageCell.m */; };
+		84036C322CA64FE600F94917 /* QuMengNativeVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C0B2CA64FE600F94917 /* QuMengNativeVideoCell.m */; };
+		84036C332CA64FE600F94917 /* QuMengRewardedVideoConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C0E2CA64FE600F94917 /* QuMengRewardedVideoConf.m */; };
+		84036C342CA64FE600F94917 /* QuMengSplashAdConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C112CA64FE600F94917 /* QuMengSplashAdConf.m */; };
+		84036C352CA64FE600F94917 /* QuMengSplashNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C132CA64FE600F94917 /* QuMengSplashNativeView.m */; };
+		84036C362CA64FE600F94917 /* QuMengBaseDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C182CA64FE600F94917 /* QuMengBaseDemoViewController.m */; };
+		84036C372CA64FE600F94917 /* QuMengBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C1A2CA64FE600F94917 /* QuMengBaseNavigationController.m */; };
+		84036C382CA64FE600F94917 /* MBProgressHUD+QuMengAD.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C1D2CA64FE600F94917 /* MBProgressHUD+QuMengAD.m */; };
+		84036C392CA64FE600F94917 /* UIColor+QuMengAD.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C1F2CA64FE600F94917 /* UIColor+QuMengAD.m */; };
+		84036C3A2CA64FE600F94917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C232CA64FE600F94917 /* AppDelegate.m */; };
+		84036C3B2CA64FE600F94917 /* bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84036C242CA64FE600F94917 /* bg@3x.png */; };
+		84036C3C2CA64FE600F94917 /* LaunchScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C262CA64FE600F94917 /* LaunchScreenViewController.m */; };
+		84036C3D2CA64FE600F94917 /* qumeng_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84036C272CA64FE600F94917 /* qumeng_logo.png */; };
+		84036C3E2CA64FE600F94917 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C292CA64FE600F94917 /* ViewController.m */; };
+		84036C432CA652A700F94917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84036C402CA652A700F94917 /* LaunchScreen.storyboard */; };
+		84036C442CA652A700F94917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C412CA652A700F94917 /* main.m */; };
+		84036CF52CA6830300F94917 /* UIInterface+QuMengRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036CF32CA6830300F94917 /* UIInterface+QuMengRotation.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8476D6472BD1357900E8F034 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84469FED2B8345B100C2BED4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84469FF42B8345B100C2BED4;
+			remoteInfo = QuMengAdSDKDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8476D6512BD1357900E8F034 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		84036BFA2CA64FE600F94917 /* QuMengFeedAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengFeedAdCell.h; sourceTree = "<group>"; };
+		84036BFB2CA64FE600F94917 /* QuMengFeedAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengFeedAdCell.m; sourceTree = "<group>"; };
+		84036BFC2CA64FE600F94917 /* QuMengFeedDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengFeedDemoViewController.h; sourceTree = "<group>"; };
+		84036BFD2CA64FE600F94917 /* QuMengFeedDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengFeedDemoViewController.m; sourceTree = "<group>"; };
+		84036BFF2CA64FE600F94917 /* QuMengInterstitialConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengInterstitialConf.h; sourceTree = "<group>"; };
+		84036C002CA64FE600F94917 /* QuMengInterstitialConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengInterstitialConf.m; sourceTree = "<group>"; };
+		84036C022CA64FE600F94917 /* QuMengNativeAtlasImgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengNativeAtlasImgeCell.h; sourceTree = "<group>"; };
+		84036C032CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengNativeAtlasImgeCell.m; sourceTree = "<group>"; };
+		84036C042CA64FE600F94917 /* QuMengNativeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengNativeCell.h; sourceTree = "<group>"; };
+		84036C052CA64FE600F94917 /* QuMengNativeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengNativeCell.m; sourceTree = "<group>"; };
+		84036C062CA64FE600F94917 /* QuMengNativeDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengNativeDemoViewController.h; sourceTree = "<group>"; };
+		84036C072CA64FE600F94917 /* QuMengNativeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengNativeDemoViewController.m; sourceTree = "<group>"; };
+		84036C082CA64FE600F94917 /* QuMengNativeSingleImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengNativeSingleImageCell.h; sourceTree = "<group>"; };
+		84036C092CA64FE600F94917 /* QuMengNativeSingleImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengNativeSingleImageCell.m; sourceTree = "<group>"; };
+		84036C0A2CA64FE600F94917 /* QuMengNativeVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengNativeVideoCell.h; sourceTree = "<group>"; };
+		84036C0B2CA64FE600F94917 /* QuMengNativeVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengNativeVideoCell.m; sourceTree = "<group>"; };
+		84036C0D2CA64FE600F94917 /* QuMengRewardedVideoConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengRewardedVideoConf.h; sourceTree = "<group>"; };
+		84036C0E2CA64FE600F94917 /* QuMengRewardedVideoConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengRewardedVideoConf.m; sourceTree = "<group>"; };
+		84036C102CA64FE600F94917 /* QuMengSplashAdConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengSplashAdConf.h; sourceTree = "<group>"; };
+		84036C112CA64FE600F94917 /* QuMengSplashAdConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengSplashAdConf.m; sourceTree = "<group>"; };
+		84036C122CA64FE600F94917 /* QuMengSplashNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengSplashNativeView.h; sourceTree = "<group>"; };
+		84036C132CA64FE600F94917 /* QuMengSplashNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengSplashNativeView.m; sourceTree = "<group>"; };
+		84036C152CA64FE600F94917 /* QuMengBaseConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengBaseConf.h; sourceTree = "<group>"; };
+		84036C172CA64FE600F94917 /* QuMengBaseDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengBaseDemoViewController.h; sourceTree = "<group>"; };
+		84036C182CA64FE600F94917 /* QuMengBaseDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengBaseDemoViewController.m; sourceTree = "<group>"; };
+		84036C192CA64FE600F94917 /* QuMengBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuMengBaseNavigationController.h; sourceTree = "<group>"; };
+		84036C1A2CA64FE600F94917 /* QuMengBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuMengBaseNavigationController.m; sourceTree = "<group>"; };
+		84036C1C2CA64FE600F94917 /* MBProgressHUD+QuMengAD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+QuMengAD.h"; sourceTree = "<group>"; };
+		84036C1D2CA64FE600F94917 /* MBProgressHUD+QuMengAD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+QuMengAD.m"; sourceTree = "<group>"; };
+		84036C1E2CA64FE600F94917 /* UIColor+QuMengAD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+QuMengAD.h"; sourceTree = "<group>"; };
+		84036C1F2CA64FE600F94917 /* UIColor+QuMengAD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+QuMengAD.m"; sourceTree = "<group>"; };
+		84036C222CA64FE600F94917 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		84036C232CA64FE600F94917 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		84036C242CA64FE600F94917 /* bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@3x.png"; sourceTree = "<group>"; };
+		84036C252CA64FE600F94917 /* LaunchScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenViewController.h; sourceTree = "<group>"; };
+		84036C262CA64FE600F94917 /* LaunchScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenViewController.m; sourceTree = "<group>"; };
+		84036C272CA64FE600F94917 /* qumeng_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qumeng_logo.png; sourceTree = "<group>"; };
+		84036C282CA64FE600F94917 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		84036C292CA64FE600F94917 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		84036C3F2CA652A700F94917 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84036C402CA652A700F94917 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84036C412CA652A700F94917 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84036CF22CA6830300F94917 /* UIInterface+QuMengRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIInterface+QuMengRotation.h"; sourceTree = "<group>"; };
+		84036CF32CA6830300F94917 /* UIInterface+QuMengRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIInterface+QuMengRotation.m"; sourceTree = "<group>"; };
+		84469FF52B8345B100C2BED4 /* QuMengAdSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuMengAdSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8476D6432BD1357900E8F034 /* QuMengAdSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuMengAdSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84C28B932BD15775009A1A6D /* InnoSecureSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InnoSecureSDK.framework; path = ../QuMengAdSDK/QuMengAdSDK/Frameworks/InnoSecureSDK.framework; sourceTree = "<group>"; };
+		84C28B942BD15775009A1A6D /* libInnoSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libInnoSDK.a; path = ../QuMengAdSDK/QuMengAdSDK/Frameworks/libInnoSDK.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84469FF22B8345B100C2BED4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8476D6402BD1357900E8F034 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		71AE5F15E9FE83C36AF6E2D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84C28B932BD15775009A1A6D /* InnoSecureSDK.framework */,
+				84C28B942BD15775009A1A6D /* libInnoSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84036BFE2CA64FE600F94917 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				84036BFA2CA64FE600F94917 /* QuMengFeedAdCell.h */,
+				84036BFB2CA64FE600F94917 /* QuMengFeedAdCell.m */,
+				84036BFC2CA64FE600F94917 /* QuMengFeedDemoViewController.h */,
+				84036BFD2CA64FE600F94917 /* QuMengFeedDemoViewController.m */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		84036C012CA64FE600F94917 /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				84036BFF2CA64FE600F94917 /* QuMengInterstitialConf.h */,
+				84036C002CA64FE600F94917 /* QuMengInterstitialConf.m */,
+			);
+			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		84036C0C2CA64FE600F94917 /* Native */ = {
+			isa = PBXGroup;
+			children = (
+				84036C022CA64FE600F94917 /* QuMengNativeAtlasImgeCell.h */,
+				84036C032CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m */,
+				84036C042CA64FE600F94917 /* QuMengNativeCell.h */,
+				84036C052CA64FE600F94917 /* QuMengNativeCell.m */,
+				84036C062CA64FE600F94917 /* QuMengNativeDemoViewController.h */,
+				84036C072CA64FE600F94917 /* QuMengNativeDemoViewController.m */,
+				84036C082CA64FE600F94917 /* QuMengNativeSingleImageCell.h */,
+				84036C092CA64FE600F94917 /* QuMengNativeSingleImageCell.m */,
+				84036C0A2CA64FE600F94917 /* QuMengNativeVideoCell.h */,
+				84036C0B2CA64FE600F94917 /* QuMengNativeVideoCell.m */,
+			);
+			path = Native;
+			sourceTree = "<group>";
+		};
+		84036C0F2CA64FE600F94917 /* RewardedVideo */ = {
+			isa = PBXGroup;
+			children = (
+				84036C0D2CA64FE600F94917 /* QuMengRewardedVideoConf.h */,
+				84036C0E2CA64FE600F94917 /* QuMengRewardedVideoConf.m */,
+			);
+			path = RewardedVideo;
+			sourceTree = "<group>";
+		};
+		84036C142CA64FE600F94917 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				84036C102CA64FE600F94917 /* QuMengSplashAdConf.h */,
+				84036C112CA64FE600F94917 /* QuMengSplashAdConf.m */,
+				84036C122CA64FE600F94917 /* QuMengSplashNativeView.h */,
+				84036C132CA64FE600F94917 /* QuMengSplashNativeView.m */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		84036C162CA64FE600F94917 /* Ad */ = {
+			isa = PBXGroup;
+			children = (
+				84036BFE2CA64FE600F94917 /* Feed */,
+				84036C012CA64FE600F94917 /* Interstitial */,
+				84036C0C2CA64FE600F94917 /* Native */,
+				84036C0F2CA64FE600F94917 /* RewardedVideo */,
+				84036C142CA64FE600F94917 /* Splash */,
+				84036C152CA64FE600F94917 /* QuMengBaseConf.h */,
+			);
+			path = Ad;
+			sourceTree = "<group>";
+		};
+		84036C1B2CA64FE600F94917 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				84036C172CA64FE600F94917 /* QuMengBaseDemoViewController.h */,
+				84036C182CA64FE600F94917 /* QuMengBaseDemoViewController.m */,
+				84036C192CA64FE600F94917 /* QuMengBaseNavigationController.h */,
+				84036C1A2CA64FE600F94917 /* QuMengBaseNavigationController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		84036C202CA64FE600F94917 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				84036C1C2CA64FE600F94917 /* MBProgressHUD+QuMengAD.h */,
+				84036C1D2CA64FE600F94917 /* MBProgressHUD+QuMengAD.m */,
+				84036C1E2CA64FE600F94917 /* UIColor+QuMengAD.h */,
+				84036C1F2CA64FE600F94917 /* UIColor+QuMengAD.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		84036C212CA64FE600F94917 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				84036C1B2CA64FE600F94917 /* Base */,
+				84036C202CA64FE600F94917 /* Category */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		84036C2A2CA64FE600F94917 /* QuMengDemoMain */ = {
+			isa = PBXGroup;
+			children = (
+				84036CF42CA6830300F94917 /* RotationTool */,
+				84036C3F2CA652A700F94917 /* Info.plist */,
+				84036C402CA652A700F94917 /* LaunchScreen.storyboard */,
+				84036C412CA652A700F94917 /* main.m */,
+				84036C162CA64FE600F94917 /* Ad */,
+				84036C212CA64FE600F94917 /* Common */,
+				84036C222CA64FE600F94917 /* AppDelegate.h */,
+				84036C232CA64FE600F94917 /* AppDelegate.m */,
+				84036C242CA64FE600F94917 /* bg@3x.png */,
+				84036C252CA64FE600F94917 /* LaunchScreenViewController.h */,
+				84036C262CA64FE600F94917 /* LaunchScreenViewController.m */,
+				84036C272CA64FE600F94917 /* qumeng_logo.png */,
+				84036C282CA64FE600F94917 /* ViewController.h */,
+				84036C292CA64FE600F94917 /* ViewController.m */,
+			);
+			name = QuMengDemoMain;
+			path = ../QuMengDemoMain;
+			sourceTree = "<group>";
+		};
+		84036CF42CA6830300F94917 /* RotationTool */ = {
+			isa = PBXGroup;
+			children = (
+				84036CF22CA6830300F94917 /* UIInterface+QuMengRotation.h */,
+				84036CF32CA6830300F94917 /* UIInterface+QuMengRotation.m */,
+			);
+			path = RotationTool;
+			sourceTree = "<group>";
+		};
+		84469FEC2B8345B100C2BED4 = {
+			isa = PBXGroup;
+			children = (
+				84036C2A2CA64FE600F94917 /* QuMengDemoMain */,
+				84469FF62B8345B100C2BED4 /* Products */,
+				EB41EA6CB58614D09791375E /* Pods */,
+				71AE5F15E9FE83C36AF6E2D0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		84469FF62B8345B100C2BED4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84469FF52B8345B100C2BED4 /* QuMengAdSDKDemo.app */,
+				8476D6432BD1357900E8F034 /* QuMengAdSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB41EA6CB58614D09791375E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84469FF42B8345B100C2BED4 /* QuMengAdSDKDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8446A00E2B8345B300C2BED4 /* Build configuration list for PBXNativeTarget "QuMengAdSDKDemo" */;
+			buildPhases = (
+				84469FF12B8345B100C2BED4 /* Sources */,
+				84469FF22B8345B100C2BED4 /* Frameworks */,
+				84469FF32B8345B100C2BED4 /* Resources */,
+				8476D6512BD1357900E8F034 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuMengAdSDKDemo;
+			productName = QuMengAdSDKDemo;
+			productReference = 84469FF52B8345B100C2BED4 /* QuMengAdSDKDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8476D6422BD1357900E8F034 /* QuMengAdSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8476D6572BD1357900E8F034 /* Build configuration list for PBXNativeTarget "QuMengAdSDKTests" */;
+			buildPhases = (
+				8476D63F2BD1357900E8F034 /* Sources */,
+				8476D6402BD1357900E8F034 /* Frameworks */,
+				8476D6412BD1357900E8F034 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8476D6482BD1357900E8F034 /* PBXTargetDependency */,
+			);
+			name = QuMengAdSDKTests;
+			productName = QuMengAdSDKTests;
+			productReference = 8476D6432BD1357900E8F034 /* QuMengAdSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84469FED2B8345B100C2BED4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					84469FF42B8345B100C2BED4 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					8476D6422BD1357900E8F034 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 84469FF42B8345B100C2BED4;
+					};
+				};
+			};
+			buildConfigurationList = 84469FF02B8345B100C2BED4 /* Build configuration list for PBXProject "QuMengAdSDKDemo" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 84469FEC2B8345B100C2BED4;
+			productRefGroup = 84469FF62B8345B100C2BED4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84469FF42B8345B100C2BED4 /* QuMengAdSDKDemo */,
+				8476D6422BD1357900E8F034 /* QuMengAdSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84469FF32B8345B100C2BED4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84036C3B2CA64FE600F94917 /* bg@3x.png in Resources */,
+				84036C432CA652A700F94917 /* LaunchScreen.storyboard in Resources */,
+				84036C3D2CA64FE600F94917 /* qumeng_logo.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8476D6412BD1357900E8F034 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84469FF12B8345B100C2BED4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84036C2B2CA64FE600F94917 /* QuMengFeedAdCell.m in Sources */,
+				84036C2C2CA64FE600F94917 /* QuMengFeedDemoViewController.m in Sources */,
+				84036C372CA64FE600F94917 /* QuMengBaseNavigationController.m in Sources */,
+				84036C362CA64FE600F94917 /* QuMengBaseDemoViewController.m in Sources */,
+				84036C392CA64FE600F94917 /* UIColor+QuMengAD.m in Sources */,
+				84036C2F2CA64FE600F94917 /* QuMengNativeCell.m in Sources */,
+				84036C332CA64FE600F94917 /* QuMengRewardedVideoConf.m in Sources */,
+				84036C3E2CA64FE600F94917 /* ViewController.m in Sources */,
+				84036C442CA652A700F94917 /* main.m in Sources */,
+				84036C302CA64FE600F94917 /* QuMengNativeDemoViewController.m in Sources */,
+				84036C2D2CA64FE600F94917 /* QuMengInterstitialConf.m in Sources */,
+				84036CF52CA6830300F94917 /* UIInterface+QuMengRotation.m in Sources */,
+				84036C312CA64FE600F94917 /* QuMengNativeSingleImageCell.m in Sources */,
+				84036C3C2CA64FE600F94917 /* LaunchScreenViewController.m in Sources */,
+				84036C382CA64FE600F94917 /* MBProgressHUD+QuMengAD.m in Sources */,
+				84036C322CA64FE600F94917 /* QuMengNativeVideoCell.m in Sources */,
+				84036C2E2CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m in Sources */,
+				84036C3A2CA64FE600F94917 /* AppDelegate.m in Sources */,
+				84036C352CA64FE600F94917 /* QuMengSplashNativeView.m in Sources */,
+				84036C342CA64FE600F94917 /* QuMengSplashAdConf.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8476D63F2BD1357900E8F034 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8476D6482BD1357900E8F034 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84469FF42B8345B100C2BED4 /* QuMengAdSDKDemo */;
+			targetProxy = 8476D6472BD1357900E8F034 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8446A00C2B8345B300C2BED4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8446A00D2B8345B300C2BED4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8446A00F2B8345B300C2BED4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0223.1700;
+				DEVELOPMENT_TEAM = ZVX932ZEM8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ../QuMengDemoMain/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "趣盟";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "趣盟想使用您的数据追踪服务";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qumeng.sdk.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8446A0102B8345B300C2BED4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0223.1700;
+				DEVELOPMENT_TEAM = ZVX932ZEM8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ../QuMengDemoMain/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "趣盟";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "趣盟想使用您的数据追踪服务";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qumeng.sdk.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8476D6542BD1357900E8F034 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xusheng.QuMengAdSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuMengAdSDKDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuMengAdSDKDemo";
+			};
+			name = Debug;
+		};
+		8476D6552BD1357900E8F034 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xusheng.QuMengAdSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuMengAdSDKDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuMengAdSDKDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84469FF02B8345B100C2BED4 /* Build configuration list for PBXProject "QuMengAdSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8446A00C2B8345B300C2BED4 /* Debug */,
+				8446A00D2B8345B300C2BED4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8446A00E2B8345B300C2BED4 /* Build configuration list for PBXNativeTarget "QuMengAdSDKDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8446A00F2B8345B300C2BED4 /* Debug */,
+				8446A0102B8345B300C2BED4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8476D6572BD1357900E8F034 /* Build configuration list for PBXNativeTarget "QuMengAdSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8476D6542BD1357900E8F034 /* Debug */,
+				8476D6552BD1357900E8F034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84469FED2B8345B100C2BED4 /* Project object */;
+}

@@ -1,0 +1,551 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name QuMengAdSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@objc public enum QuMengMaterialType : Swift.UInt, @unchecked Swift.Sendable {
+  case imageSmall = 1
+  case imageLarge = 2
+  case imageAtlas = 3
+  case video = 4
+  case splash = 6
+  case rewardedVideo = 12
+  public init?(rawValue: Swift.UInt)
+  public typealias RawValue = Swift.UInt
+  public var rawValue: Swift.UInt {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class QuMengImage : ObjectiveC.NSObject {
+  @objc public var url: Swift.String {
+    @objc get
+  }
+  @objc public var width: CoreFoundation.CGFloat {
+    @objc get
+  }
+  @objc public var height: CoreFoundation.CGFloat {
+    @objc get
+  }
+  @objc public var duration: Swift.Int {
+    @objc get
+  }
+  @objc public var mute: Swift.Bool {
+    @objc get
+  }
+  @objc public var auto_play: Swift.Bool {
+    @objc get
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class QMRetentionAlertInfo : ObjectiveC.NSObject {
+  @objc public var messageTitle: Swift.String?
+  @objc public var messageBody: Swift.String?
+  @objc public var confirmButtonText: Swift.String
+  @objc public var cancelButtonText: Swift.String
+  @objc override dynamic public init()
+  @objc public init(messageTitle: Swift.String? = "温馨提示", messageBody: Swift.String? = nil, confirmButtonText: Swift.String = "继续观看", cancelButtonText: Swift.String = "残忍拒绝")
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class QuMengNativeMaterial : ObjectiveC.NSObject {
+  @objc public var type: QuMengAdSDK.QuMengMaterialType {
+    @objc get
+  }
+  @objc public var title: Swift.String {
+    @objc get
+  }
+  @objc public var desc: Swift.String {
+    @objc get
+  }
+  @objc public var qmMedia: QuMengAdSDK.QuMengImage {
+    @objc get
+    @objc set
+  }
+  @objc public var atlasImage: [QuMengAdSDK.QuMengImage] {
+    @objc get
+    @objc set
+  }
+  @objc public var interactionTitle: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public enum QuMengAdSDKInitializationState : Swift.UInt {
+  case notReady = 0
+  case ready = 1
+  public init?(rawValue: Swift.UInt)
+  public typealias RawValue = Swift.UInt
+  public var rawValue: Swift.UInt {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class QuMengAdSDKManager : ObjectiveC.NSObject {
+  @objc public class func sdkVersion() -> Swift.String
+  @objc public class func shortSdkVersion() -> Swift.String
+  @objc public class func sdkState() -> QuMengAdSDK.QuMengAdSDKInitializationState
+  @objc public class func setupSDK(with config: QuMengAdSDK.QuMengAdSDKConfiguration)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol QuMengNativeAdDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_nativeAdLoadSuccess(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc optional func qumeng_nativeAdLoadFail(_ nativeAd: QuMengAdSDK.QuMengNativeAd, error: any Swift.Error)
+  @objc optional func qumeng_nativeAdDidShow(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc optional func qumeng_nativeAdDidClick(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc optional func qumeng_nativeAdDidCloseOtherController(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+}
+@objc @objcMembers public class QuMengNativeAd : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengNativeAdDelegate)?
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var ecpm: Swift.Int {
+    @objc get
+  }
+  @objc public var meta: QuMengAdSDK.QuMengAdMeta? {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var metaDic: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public var slotID: Swift.String {
+    @objc get
+  }
+  @objc public var relatedView: QuMengAdSDK.QuMengNativeAdRelatedView?
+  @objc weak public var viewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var materialMeta: QuMengAdSDK.QuMengNativeMaterial? {
+    @objc get
+  }
+  @objc public init(slot slotID: Swift.String)
+  @objc public func loadAdData()
+  @objc public func registerContainer(_ containerView: UIKit.UIView, withClickableViews clickableViews: [UIKit.UIView]?)
+  @objc public func unregisterView()
+  @objc deinit
+}
+@objc public enum QuMengInterstitialAdCloseType : Swift.Int {
+  case unknow = 0
+  case skip = 1
+  case clickAd = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol QuMengInterstitialAdDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_interstitialAdLoadSuccess(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdLoadFail(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd, error: (any Swift.Error)?)
+  @objc optional func qumeng_interstitialAdDidShow(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdDidClick(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdDidClose(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd, closeType type: QuMengAdSDK.QuMengInterstitialAdCloseType)
+  @objc optional func qumeng_interstitialAdDidCloseOtherController(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdDidStart(_ rewardedVideoAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdDidPause(_ rewardedVideoAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdDidResume(_ rewardedVideoAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdVideoDidPlayComplection(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd)
+  @objc optional func qumeng_interstitialAdVideoDidPlayFinished(_ interstitialAd: QuMengAdSDK.QuMengInterstitialAd, didFailWithError error: any Swift.Error)
+}
+@objc @objcMembers public class QuMengInterstitialAd : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengInterstitialAdDelegate)?
+  @objc public var adClickToCloseAutomatically: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var ecpm: Swift.Int {
+    @objc get
+  }
+  @objc weak public var viewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  @objc public var meta: QuMengAdSDK.QuMengAdMeta? {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var metaDic: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public var slotID: Swift.String {
+    @objc get
+  }
+  @objc public init(slot slotID: Swift.String)
+  @objc public func loadAdData()
+  @objc public func showInterstitialView(inRootViewController viewController: UIKit.UIViewController)
+  @objc deinit
+}
+@objc public protocol QuMengSplashNativeAdDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_splashAdLoadSuccess(_ splashAd: QuMengAdSDK.QuMengSplashNativeAd)
+  @objc optional func qumeng_splashAdLoadFail(_ splashAd: QuMengAdSDK.QuMengSplashNativeAd, error: (any Swift.Error)?)
+  @objc optional func qumeng_splashAdDidShow(_ splashAd: QuMengAdSDK.QuMengSplashNativeAd)
+  @objc optional func qumeng_splashAdDidClick(_ splashAd: QuMengAdSDK.QuMengSplashNativeAd)
+  @objc optional func qumeng_splashAdDidClose(_ splashAd: QuMengAdSDK.QuMengSplashNativeAd, closeType type: QuMengAdSDK.QuMengSplashAdCloseType)
+}
+@objc @objcMembers public class QuMengSplashNativeAd : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengSplashNativeAdDelegate)?
+  @objc weak public var viewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  @objc public var meta: QuMengAdSDK.QuMengAdMeta? {
+    @objc get
+    @objc set
+  }
+  @objc public init(slot slotID: Swift.String)
+  @objc public func loadAdData()
+  @objc public func registerContainer(_ containerView: UIKit.UIView, withClickableViews clickableViews: [UIKit.UIView]?)
+  @objc public func unregisterView()
+  @objc deinit
+}
+extension QuMengAdSDK.QuMengSplashNativeAd : QuMengAdSDK.QuMengNativeAdDelegate {
+  @objc dynamic public func qumeng_nativeAdLoadSuccess(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc dynamic public func qumeng_nativeAdLoadFail(_ nativeAd: QuMengAdSDK.QuMengNativeAd, error: any Swift.Error)
+  @objc dynamic public func qumeng_nativeAdDidShow(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc dynamic public func qumeng_nativeAdDidClick(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc dynamic public func qumeng_nativeAdDidCloseOtherController(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+}
+public enum QuMengDialogDirection : Swift.Int {
+  case top, left, bottom, right, center
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum QuMengDialogLevel : Swift.Int {
+  case low, middle, high, superHigh
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol QuMengDialogProtocol : AnyObject {
+  func willAppear()
+  func didAppear()
+  func dismissAppear()
+  func dialogContainer() -> UIKit.UIView
+  func dialogBackgroundColor() -> UIKit.UIColor
+  func clickFloatingLayerToCancel() -> Swift.Bool
+  func slidingDisappearance() -> Swift.Bool
+  func dialogLevel() -> QuMengAdSDK.QuMengDialogLevel
+  func dialogDirection() -> QuMengAdSDK.QuMengDialogDirection
+  func mayBeConflictingGestures() -> Swift.Array<UIKit.UIGestureRecognizer>
+  func dialogGesturePenetration() -> Swift.Bool
+  func centerShowAnimate(animations: (Swift.Bool) -> Swift.Void, completion: () -> Swift.Void)
+  func centerDismissAnimate(animations: (Swift.Bool) -> Swift.Void, completion: () -> Swift.Void)
+  func layoutParameter() -> ((width: CoreFoundation.CGFloat, screenRatio: Swift.Bool), (height: CoreFoundation.CGFloat, screenRatio: Swift.Bool))
+}
+@objc public protocol QuMengNativeAdRelatedViewDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_nativeAdRelatedViewDidStart(_ nativeAdRelatedView: QuMengAdSDK.QuMengNativeAdRelatedView)
+  @objc optional func qumeng_nativeAdRelatedViewDidPause(_ nativeAdRelatedView: QuMengAdSDK.QuMengNativeAdRelatedView)
+  @objc optional func qumeng_nativeAdRelatedViewDidResume(_ nativeAdRelatedView: QuMengAdSDK.QuMengNativeAdRelatedView)
+  @objc optional func qumeng_nativeAdRelatedViewDidPlayComplection(_ nativeAdRelatedView: QuMengAdSDK.QuMengNativeAdRelatedView)
+  @objc optional func qumeng_nativeAdRelatedViewDidPlayFinished(_ nativeAdRelatedView: QuMengAdSDK.QuMengNativeAdRelatedView, didFailWithError error: any Swift.Error)
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class QuMengNativeAdRelatedView : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengNativeAdRelatedViewDelegate)?
+  @objc weak public var nativeAd: QuMengAdSDK.QuMengNativeAd?
+  @objc override dynamic public init()
+  @objc public var adLabel: UIKit.UILabel? {
+    @objc get
+  }
+  @objc public var videoAdView: UIKit.UIView? {
+    @objc get
+  }
+  @objc public func refreshData(_ nativeAd: QuMengAdSDK.QuMengNativeAd)
+  @objc public func refreshData(splashNativeAd: QuMengAdSDK.QuMengSplashNativeAd)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class QuMengAdMeta : ObjectiveC.NSObject {
+  @objc public var getRequestId: Swift.String {
+    @objc get
+  }
+  @objc public var getIdeaId: Swift.String {
+    @objc get
+  }
+  @objc public var getECPM: Swift.Int {
+    @objc get
+  }
+  @objc public var getTitle: Swift.String {
+    @objc get
+  }
+  @objc public var getDesc: Swift.String {
+    @objc get
+  }
+  @objc public var logoUrl: Swift.String {
+    @objc get
+  }
+  @objc public var getLandingPageUrl: Swift.String {
+    @objc get
+  }
+  @objc public var getInteractionType: Swift.Int {
+    @objc get
+  }
+  @objc public var getInteractionTitle: Swift.String {
+    @objc get
+  }
+  @objc public var getMediaUrl: Swift.String {
+    @objc get
+  }
+  @objc public var getMediaMute: Swift.Bool {
+    @objc get
+  }
+  @objc public var getAppLogoUrl: Swift.String {
+    @objc get
+  }
+  @objc public var getAppName: Swift.String {
+    @objc get
+  }
+  @objc public var getAppPackageName: Swift.String {
+    @objc get
+  }
+  @objc public var getAppInformation: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public var getMediaSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @objc public var getExtUrls: [Swift.String] {
+    @objc get
+  }
+  @objc public var getMaterialType: Swift.Int {
+    @objc get
+  }
+  @objc public var getVideoDuration: Swift.Int {
+    @objc get
+  }
+  @objc deinit
+}
+@objc public protocol QuMengFeedAdDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_feedAdLoadSuccess(_ feedAd: QuMengAdSDK.QuMengFeedAd?)
+  @objc optional func qumeng_feedAdLoadFail(_ feedAd: QuMengAdSDK.QuMengFeedAd?, error: any Swift.Error)
+  @objc optional func qumeng_feedAdDidShow(_ feedAd: QuMengAdSDK.QuMengFeedAd?)
+  @objc optional func qumeng_feedAdDidClick(_ feedAd: QuMengAdSDK.QuMengFeedAd?)
+  @objc optional func qumeng_feedAdDidClose(_ feedAd: QuMengAdSDK.QuMengFeedAd?)
+  @objc optional func qumeng_feedAdDidCloseOtherController(_ feedAd: QuMengAdSDK.QuMengFeedAd?)
+  @objc optional func qumeng_feedAdDidStart(_ feedAd: QuMengAdSDK.QuMengFeedAd)
+  @objc optional func qumeng_feedAdDidPause(_ feedAd: QuMengAdSDK.QuMengFeedAd)
+  @objc optional func qumeng_feedAdDidResume(_ feedAd: QuMengAdSDK.QuMengFeedAd)
+  @objc optional func qumeng_feedAdVideoDidPlayComplection(_ feedAd: QuMengAdSDK.QuMengFeedAd)
+  @objc optional func qumeng_feedAdVideoDidPlayFinished(_ feedAd: QuMengAdSDK.QuMengFeedAd, didFailWithError error: any Swift.Error)
+}
+@objc @objcMembers public class QuMengFeedAd : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengFeedAdDelegate)?
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var ecpm: Swift.Int {
+    @objc get
+  }
+  @objc public var customSize: CoreFoundation.CGSize {
+    @objc get
+    @objc set
+  }
+  @objc weak public var viewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  @objc public var meta: QuMengAdSDK.QuMengAdMeta? {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var metaDic: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public var slotID: Swift.String {
+    @objc get
+  }
+  @objc public var feedView: UIKit.UIView? {
+    @objc get
+  }
+  @objc public func handleFeedAdHeight() -> CoreFoundation.CGFloat
+  @objc public func loadAdData()
+  @objc public init(slot slotID: Swift.String)
+  @objc deinit
+}
+@objc public enum QuMengSplashAdCloseType : Swift.UInt, @unchecked Swift.Sendable {
+  case unknow = 0
+  case skip = 1
+  case countdown = 2
+  case clickAd = 3
+  public init?(rawValue: Swift.UInt)
+  public typealias RawValue = Swift.UInt
+  public var rawValue: Swift.UInt {
+    get
+  }
+}
+@objc public protocol QuMengSplashAdDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_splashAdLoadSuccess(_ splashAd: QuMengAdSDK.QuMengSplashAd)
+  @objc optional func qumeng_splashAdLoadFail(_ splashAd: QuMengAdSDK.QuMengSplashAd, error: (any Swift.Error)?)
+  @objc optional func qumeng_splashAdDidShow(_ splashAd: QuMengAdSDK.QuMengSplashAd)
+  @objc optional func qumeng_splashAdDidClick(_ splashAd: QuMengAdSDK.QuMengSplashAd)
+  @objc optional func qumeng_splashAdDidClose(_ splashAd: QuMengAdSDK.QuMengSplashAd, closeType type: QuMengAdSDK.QuMengSplashAdCloseType)
+  @objc optional func qumeng_splashAdVideoDidPlayFinished(_ splashAd: QuMengAdSDK.QuMengSplashAd, didFailWithError error: any Swift.Error)
+}
+@objc @objcMembers public class QuMengSplashAd : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengSplashAdDelegate)?
+  @objc public var adClickToCloseAutomatically: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var ecpm: Swift.Int {
+    @objc get
+  }
+  @objc weak public var viewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  @objc public var meta: QuMengAdSDK.QuMengAdMeta? {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var metaDic: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public var slotID: Swift.String {
+    @objc get
+  }
+  @objc public init(slot slotID: Swift.String)
+  @objc public func loadAdData()
+  @objc public func showSplashViewController(_ controller: UIKit.UIViewController, winthBottomView bottomView: UIKit.UIView)
+  @objc public func showSplashViewController(_ controller: UIKit.UIViewController)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class QuMengAdSDKConfiguration : ObjectiveC.NSObject {
+  @objc public static let shareConfiguration: QuMengAdSDK.QuMengAdSDKConfiguration
+  @objc public var appId: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var isEnablePersonalAds: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var customIdfa: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var caid: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var caidVersion: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc open var lastCaid: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var lastCaidVersion: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var longitude: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var latitude: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc public var canSniffingInstalls: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var exceptionGuard: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc public enum QuMengRewardedVideoAdCloseType : Swift.UInt, @unchecked Swift.Sendable {
+  case unknow = 0
+  case skip = 1
+  case clickAd = 3
+  public init?(rawValue: Swift.UInt)
+  public typealias RawValue = Swift.UInt
+  public var rawValue: Swift.UInt {
+    get
+  }
+}
+@objc public protocol QuMengRewardedVideoAdDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func qumeng_rewardedVideoAdLoadSuccess(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdLoadFail(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd, error: (any Swift.Error)?)
+  @objc optional func qumeng_rewardedVideoAdDidShow(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdDidClick(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdDidClose(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd, closeType type: QuMengAdSDK.QuMengRewardedVideoAdCloseType)
+  @objc optional func qumeng_rewardedVideoAdDidCloseOtherController(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdDidRewarded(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdDidStart(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdDidPause(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdDidResume(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd)
+  @objc optional func qumeng_rewardedVideoAdVideoDidPlayComplection(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd, rewarded isRewarded: Swift.Bool)
+  @objc optional func qumeng_rewardedVideoAdVideoDidPlayFinished(_ rewardedVideoAd: QuMengAdSDK.QuMengRewardedVideoAd, didFailWithError error: any Swift.Error, rewarded isRewarded: Swift.Bool)
+}
+@objc @objcMembers open class QuMengRewardedVideoAd : ObjectiveC.NSObject {
+  @objc weak public var delegate: (any QuMengAdSDK.QuMengRewardedVideoAdDelegate)?
+  @objc public var adClickToCloseAutomatically: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var ecpm: Swift.Int {
+    @objc get
+  }
+  @objc weak public var viewController: UIKit.UIViewController? {
+    @objc get
+    @objc set
+  }
+  @objc public var meta: QuMengAdSDK.QuMengAdMeta? {
+    @objc get
+    @objc set
+  }
+  @objc public var retentionInfo: QuMengAdSDK.QMRetentionAlertInfo? {
+    @objc get
+    @objc set
+  }
+  @objc @available(*, deprecated, message: "Use meta.")
+  public var metaDic: [Swift.String : Any] {
+    @objc get
+  }
+  @objc public var slotID: Swift.String {
+    @objc get
+  }
+  @objc public init(slot slotID: Swift.String)
+  @objc public func loadAdData()
+  @objc public func showRewardedVideoView(inRootViewController viewController: UIKit.UIViewController)
+  @objc deinit
+}
+extension QuMengAdSDK.QuMengMaterialType : Swift.Equatable {}
+extension QuMengAdSDK.QuMengMaterialType : Swift.Hashable {}
+extension QuMengAdSDK.QuMengMaterialType : Swift.RawRepresentable {}
+extension QuMengAdSDK.QuMengAdSDKInitializationState : Swift.Equatable {}
+extension QuMengAdSDK.QuMengAdSDKInitializationState : Swift.Hashable {}
+extension QuMengAdSDK.QuMengAdSDKInitializationState : Swift.RawRepresentable {}
+extension QuMengAdSDK.QuMengInterstitialAdCloseType : Swift.Equatable {}
+extension QuMengAdSDK.QuMengInterstitialAdCloseType : Swift.Hashable {}
+extension QuMengAdSDK.QuMengInterstitialAdCloseType : Swift.RawRepresentable {}
+extension QuMengAdSDK.QuMengDialogDirection : Swift.Equatable {}
+extension QuMengAdSDK.QuMengDialogDirection : Swift.Hashable {}
+extension QuMengAdSDK.QuMengDialogDirection : Swift.RawRepresentable {}
+extension QuMengAdSDK.QuMengDialogLevel : Swift.Equatable {}
+extension QuMengAdSDK.QuMengDialogLevel : Swift.Hashable {}
+extension QuMengAdSDK.QuMengDialogLevel : Swift.RawRepresentable {}
+extension QuMengAdSDK.QuMengSplashAdCloseType : Swift.Equatable {}
+extension QuMengAdSDK.QuMengSplashAdCloseType : Swift.Hashable {}
+extension QuMengAdSDK.QuMengSplashAdCloseType : Swift.RawRepresentable {}
+extension QuMengAdSDK.QuMengRewardedVideoAdCloseType : Swift.Equatable {}
+extension QuMengAdSDK.QuMengRewardedVideoAdCloseType : Swift.Hashable {}
+extension QuMengAdSDK.QuMengRewardedVideoAdCloseType : Swift.RawRepresentable {}
