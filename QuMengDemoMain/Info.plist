@@ -12,17 +12,30 @@
 				<string>qm</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxe0135baa2b2554e8</string>
+			</array>
+		</dict>
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>wechat</string>
+		<string>weixin</string>
+		<string>weixinULAPI</string>
+		<string>weixinURLParamsAPI</string>
+		<string>wechaT</string>
 		<string>weixin</string>
 		<string>weixinULAPI</string>
 		<string>mqq</string>
 		<string>mqqapi</string>
 		<string>mqqopensdkapiV2</string>
 		<string>mqqopensdkapiV4</string>
-		<string>jdmobile</string>
+		<string>jdmobilE</string>
 		<string>openApp.jdMobile</string>
 		<string>openapp.jdmobile</string>
 		<string>openjdlite</string>
@@ -35,7 +48,7 @@
 		<string>tmall</string>
 		<string>alipay</string>
 		<string>alipays</string>
-		<string>imeituan</string>
+		<string>iMeituan</string>
 		<string>meituanwaimai</string>
 		<string>ctrip</string>
 		<string>palfish-read</string>
@@ -47,8 +60,8 @@
 		<string>sinaweibo</string>
 		<string>baidumobads</string>
 		<string>itms-beta</string>
-		<string>pddopen</string>
-		<string>pinduoduo</string>
+		<string>pddopeN</string>
+		<string>pinduoduO</string>
 		<string>snssdk35</string>
 		<string>snssdk1128</string>
 		<string>snssdk1112</string>
@@ -174,5 +187,7 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>此标识符将用于向您推荐个性化广告。</string>
 </dict>
 </plist>

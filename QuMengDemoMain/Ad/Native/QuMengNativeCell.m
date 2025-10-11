@@ -6,12 +6,12 @@
 //
 
 #import "QuMengNativeCell.h"
-#import <Masonry.h>
 
-@interface QuMengNativeCell () 
+#import <Masonry/Masonry.h>
 
-@property (nonatomic, strong) UIButton *actionBtn;
-@property (nonatomic, strong) UILabel *titleLab;
+#import "ViewController.h"
+
+@interface QuMengNativeCell ()
 
 @end
 
@@ -19,16 +19,16 @@
 
 - (void)refreshWithData:(QuMengNativeAd *)nativeAd {
     self.nativeAd = nativeAd;
-    [nativeAd.relatedView refreshData:nativeAd];
     self.titleLab.text = nativeAd.meta.getTitle;
     [self.actionBtn setTitle:nativeAd.meta.getInteractionTitle forState:UIControlStateNormal];    
     [nativeAd registerContainer:self.contentView withClickableViews:@[self.actionBtn, self.titleLab]];
+    
+    if (nativeAdShowSlide()) {
+        [self.contentView bringSubviewToFront:self.slideView];
+        self.slideView.nativeAd = nativeAd;
+    }
+    
 }
-
-//// TopOn 数据展示
-//- (void)refreshWithOffer:(ATNativeAdOffer *)offer {
-//    
-//}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -43,17 +43,34 @@
     
     __weak typeof(self) weakSelf = self;
     [self.actionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.contentView).offset(-20);
-        make.bottom.equalTo(weakSelf.contentView).offset(-5);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
+        make.right.equalTo(strongSelf.contentView).offset(-20);
+        make.bottom.equalTo(strongSelf.contentView).offset(-5);
         make.height.mas_equalTo(25);
     }];
     
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.contentView).offset(20);
-        make.right.equalTo(weakSelf.contentView).offset(-20);
-        make.top.equalTo(weakSelf.contentView).offset(5);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
+        make.left.equalTo(strongSelf.contentView).offset(20);
+        make.right.equalTo(strongSelf.contentView).offset(-20);
+        make.top.equalTo(strongSelf.contentView).offset(5);
         make.height.mas_equalTo(30);
     }];
+    
+    if (nativeAdShowSlide()) {
+        [self.contentView addSubview:self.slideView];
+        [self.slideView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (!strongSelf) return;
+            
+            make.left.top.right.mas_equalTo(strongSelf);
+            make.height.mas_equalTo(@100);
+        }];
+    }
 }
 
 - (UIButton *)actionBtn {
@@ -72,6 +89,12 @@
     return _titleLab;
 }
 
-
+- (QuMengNativeAdSlideView *)slideView {
+    if (!_slideView) {
+        _slideView = [[QuMengNativeAdSlideView alloc] init];
+        _slideView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+    }
+    return _slideView;
+}
 
 @end

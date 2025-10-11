@@ -8,6 +8,7 @@
 #import "QuMengSplashNativeView.h"
 #import <Masonry/Masonry.h>
 #import <UIImageView+YYWebImage.h>
+#import <QuMengAdSDK/QuMengAdSDK.h>
 
 @interface QuMengSplashNativeView()
 @property (nonatomic, strong) UIView *adView;
@@ -16,37 +17,9 @@
 
 @implementation QuMengSplashNativeView
 
-- (instancetype)initWithSplashNativeAd:(QuMengSplashNativeAd *)splashNativeAd {
+- (instancetype)initWithSplashNativeAd:(id)splashNativeAd {
     if (self = [super init]) {
-        if (splashNativeAd.meta.getMaterialType == 4) {
-            QuMengNativeAdRelatedView *ad = [[QuMengNativeAdRelatedView alloc] init];
-            [ad refreshDataWithSplashNativeAd:splashNativeAd];
-            self.adView = ad.videoAdView;
-        } else {
-            UIImageView *imageView = [[UIImageView alloc] init];
-            [imageView yy_setImageWithURL:[NSURL URLWithString:splashNativeAd.meta.getMediaUrl] placeholder:nil];
-            self.adView = imageView;
-        }
-        
-        [self addSubview:self.adView];
-        [self.adView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
-        
-        [self addSubview:self.skipBtn];
-        [self.skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(@80);
-            make.right.mas_equalTo(@-20);
-            make.size.mas_equalTo(CGSizeMake(70, 30));
-        }];
-        
-        [self addSubview:self.actionBtn];
-        [self.actionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(@-40);
-            make.right.mas_equalTo(@-20);
-            make.centerX.equalTo(self);
-            make.height.mas_equalTo(@56);
-        }];               
+           
     }
     return self;
 }

@@ -5,17 +5,19 @@
 //  Created by qusy on 2023/12/29.
 //
 
-#import <QuMengAdSDK/QuMengAdSDK-Swift.h>
 #import "AppDelegate.h"
 #import "QuMengBaseNavigationController.h"
 #import "ViewController.h"
 #import "MBProgressHUD.h"
-#import <DoraemonKit/DoraemonKit.h>
-//#import <AnyThinkSDK/AnyThinkSDK.h>
 #import "LaunchScreenViewController.h"
 #import "UIInterface+QuMengRotation.h"
 
+#import <QuMengAdSDK/QuMengAdSDK.h>
+#import <AdSupport/AdSupport.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+
 @interface AppDelegate ()
+
 @end
 
 @implementation AppDelegate
@@ -33,32 +35,77 @@
         self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
     
-    [[DoraemonManager shareInstance] install];
-    [self steupQuMengAdSDK];
-    [self setupAnyThinkSDK];
+    // 开启不初始化 SDK 开关
+    if (!donotSetupSDK()) {
+        [self setupQuMengAdSDK];
+    }
+    
+    // 个性化推荐
+    if (checkEnablePersonalAds()) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self requestTrackingAuth];
+        });
+    }
+    
     return YES;
 }
 
-- (void)steupQuMengAdSDK {
+- (void)setupQuMengAdSDK {
     QuMengAdSDKConfiguration *config = [QuMengAdSDKConfiguration shareConfiguration];
-    config.isEnablePersonalAds = YES;
+    config.isEnablePersonalAds = checkEnablePersonalAds();
     config.appId = @"80006109";
-    config.caid = @"";
-    config.caidVersion = @"";
-    config.lastCaid = @"";
-    config.lastCaidVersion = @"";
+    config.qmcds = @[
+        @{@"qmcd": @"", @"version": @""},
+        @{@"qmcd": @"", @"version": @""}
+    ];
     config.longitude = @"121.5185";
     config.latitude = @"31.1228";
     [QuMengAdSDKManager setupSDKWith:config];
+    
+    if (twistDisabled()) {
+        [QuMengAdSDKManager setTwistSwitch:NO];
+    }
 }
 
-// 集成 topon SDK
-- (void)setupAnyThinkSDK {
-//    [ATAPI setLogEnabled:YES];
-//    [ATAPI integrationChecking];
-//    [[ATAPI sharedInstance] startWithAppID:@"a66c58dcc3b629" appKey:@"a6e3ef6c5911a260ab2072d235f1ff394" error:nil];
+// IDFA
+- (NSString *)getIDFA {
+    NSString *idfaString = @"";
+
+    if (@available(iOS 14, *)) {
+        // iOS 14 及以上需要先请求权限
+        if ([ATTrackingManager trackingAuthorizationStatus] == ATTrackingManagerAuthorizationStatusAuthorized) {
+            idfaString = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+        } else {
+            idfaString = @""; // 没授权返回空
+        }
+    } else {
+        // iOS 10 ~ iOS 13 直接获取
+        if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+            idfaString = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+        } else {
+            idfaString = @""; // 用户关闭了广告追踪
+        }
+    }
+    return idfaString;
 }
 
+// iOS14+ 请求权限的调用示例
+- (void)requestTrackingAuth {
+    if (@available(iOS 14, *)) {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                NSString *idfa = [self getIDFA];
+                NSLog(@"授权成功，IDFA = %@", idfa);
+            } else {
+                NSLog(@"未授权，IDFA 获取不到");
+            }
+        }];
+    } else {
+        // iOS 10-13 不需要申请
+        NSString *idfa = [self getIDFA];
+        NSLog(@"直接获取 IDFA = %@", idfa);
+    }
+}
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     NSString *query = [url query];
@@ -76,5 +123,8 @@
     return [[UIViewController topViewControllerForKeyWindow] supportedInterfaceOrientations];
 }
 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray<id<UIUserActivityRestoring>> * __nullable restorableObjects))restorationHandler {
+    return YES;
+}
 
 @end

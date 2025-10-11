@@ -6,7 +6,7 @@
 //
 
 #import "QuMengBaseDemoViewController.h"
-#import <Masonry.h>
+
 #import "UIColor+QuMengAD.h"
 
 @interface QuMengBaseDemoViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -17,14 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHex:@"#F5F5F5"];
+    self.view.backgroundColor = [UIColor qumeng_colorWithHex:@"#F5F5F5"];
     self.sourceArray = @[];
     
     [self.view addSubview:self.tableView];
     __weak typeof(self) weakSelf = self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(weakSelf.view);
-        make.top.equalTo(weakSelf.view).offset(0);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
+        make.left.right.bottom.equalTo(strongSelf.view);
+        make.top.equalTo(strongSelf.view).offset(0);
     }];
 }
 
@@ -56,8 +59,8 @@
         UITableView *table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         table.dataSource = self;
         table.delegate = self;
-        table.backgroundColor = [UIColor colorWithHex:@"#F5F5F5"];
-        table.separatorColor = [UIColor colorWithHex:@"#CCCCCC"];
+        table.backgroundColor = [UIColor qumeng_colorWithHex:@"#F5F5F5"];
+        table.separatorColor = [UIColor qumeng_colorWithHex:@"#CCCCCC"];
         table.separatorInset = UIEdgeInsetsZero;
         table.sectionHeaderHeight = 40;
         if (@available(iOS 15.0, *)) {

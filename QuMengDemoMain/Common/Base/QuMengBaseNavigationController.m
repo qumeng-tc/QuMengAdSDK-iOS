@@ -6,6 +6,7 @@
 //
 
 #import "QuMengBaseNavigationController.h"
+
 #import "UIColor+QuMengAD.h"
 
 @interface QuMengBaseNavigationController ()
@@ -16,9 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationBar.barTintColor = [UIColor colorWithHex:@"#FFFFFF"];
-    self.navigationBar.tintColor = [UIColor colorWithHex:@"#333333"];
-    [self.navigationBar setShadowImage:[UIColor imageWith:@"#CCCCCC" size:CGSizeMake(CGRectGetWidth(self.view.frame), 0.5)]];
+    self.navigationBar.barTintColor = [UIColor qumeng_colorWithHex:@"#FFFFFF"];
+    self.navigationBar.tintColor = [UIColor qumeng_colorWithHex:@"#333333"];
+    [self.navigationBar setShadowImage:[UIColor qumeng_imageWith:@"#CCCCCC" size:CGSizeMake(CGRectGetWidth(self.view.frame), 0.5)]];
 }
 
 - (BOOL)shouldAutorotate {

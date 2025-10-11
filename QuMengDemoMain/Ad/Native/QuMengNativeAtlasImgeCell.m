@@ -6,8 +6,10 @@
 //
 
 #import "QuMengNativeAtlasImgeCell.h"
-#import <Masonry.h>
-#import <UIImageView+YYWebImage.h>
+
+#import <QuMengAdSDK/QuMengAdSDK.h>
+#import <Masonry/Masonry.h>
+#import <YYWebImage/UIImageView+YYWebImage.h>
 
 @interface QuMengNativeAtlasImgeCell ()
 
@@ -38,20 +40,29 @@
         
         __weak typeof(self) weakSelf = self;
         [self.coverImg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(weakSelf.contentView);
-            make.top.equalTo(weakSelf.contentView).offset(30);
-            make.bottom.equalTo(weakSelf.contentView).offset(-35);
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (!strongSelf) return;
+            
+            make.left.equalTo(strongSelf.contentView);
+            make.top.equalTo(strongSelf.contentView).offset(30);
+            make.bottom.equalTo(strongSelf.contentView).offset(-35);
         }];
         
         [self.coverImg2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.width.height.equalTo(weakSelf.coverImg);
-            make.left.equalTo(weakSelf.coverImg.mas_right).offset(2);
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (!strongSelf) return;
+            
+            make.top.width.height.equalTo(strongSelf.coverImg);
+            make.left.equalTo(strongSelf.coverImg.mas_right).offset(2);
         }];
         
         [self.coverImg3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.width.height.equalTo(weakSelf.coverImg2);
-            make.left.equalTo(weakSelf.coverImg2.mas_right).offset(2);
-            make.right.equalTo(weakSelf.contentView);
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (!strongSelf) return;
+            
+            make.top.width.height.equalTo(strongSelf.coverImg2);
+            make.left.equalTo(strongSelf.coverImg2.mas_right).offset(2);
+            make.right.equalTo(strongSelf.contentView);
         }];
     }
     return self;

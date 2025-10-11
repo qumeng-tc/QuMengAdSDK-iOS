@@ -30,6 +30,11 @@
 		84036C432CA652A700F94917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84036C402CA652A700F94917 /* LaunchScreen.storyboard */; };
 		84036C442CA652A700F94917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036C412CA652A700F94917 /* main.m */; };
 		84036CF52CA6830300F94917 /* UIInterface+QuMengRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84036CF32CA6830300F94917 /* UIInterface+QuMengRotation.m */; };
+		84DF87A82E45D00F00102348 /* DelayedShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF87A72E45D00F00102348 /* DelayedShowViewController.m */; };
+		85485FE62D23F6D2006B0BD8 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 85485FE52D23F6D2006B0BD8 /* Tool.m */; };
+		8555977A2CE71EBF0072C7E1 /* QuMengSplashContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 855597792CE71EBF0072C7E1 /* QuMengSplashContainerViewController.m */; };
+		85E1EA882D0848D300ED6C07 /* QuMengFeedSingleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1EA872D0848D300ED6C07 /* QuMengFeedSingleViewController.m */; };
+		85E1EA8B2D0848E100ED6C07 /* QuMengNativeSingleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1EA8A2D0848E100ED6C07 /* QuMengNativeSingleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,9 +106,20 @@
 		84036CF22CA6830300F94917 /* UIInterface+QuMengRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIInterface+QuMengRotation.h"; sourceTree = "<group>"; };
 		84036CF32CA6830300F94917 /* UIInterface+QuMengRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIInterface+QuMengRotation.m"; sourceTree = "<group>"; };
 		84469FF52B8345B100C2BED4 /* QuMengAdSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuMengAdSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84755BA62D352410005F6F4A /* QuMengAdSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuMengAdSDKDemo.entitlements; sourceTree = "<group>"; };
 		8476D6432BD1357900E8F034 /* QuMengAdSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuMengAdSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C28B932BD15775009A1A6D /* InnoSecureSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InnoSecureSDK.framework; path = ../QuMengAdSDK/QuMengAdSDK/Frameworks/InnoSecureSDK.framework; sourceTree = "<group>"; };
 		84C28B942BD15775009A1A6D /* libInnoSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libInnoSDK.a; path = ../QuMengAdSDK/QuMengAdSDK/Frameworks/libInnoSDK.a; sourceTree = "<group>"; };
+		84DF87A62E45D00F00102348 /* DelayedShowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelayedShowViewController.h; sourceTree = "<group>"; };
+		84DF87A72E45D00F00102348 /* DelayedShowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DelayedShowViewController.m; sourceTree = "<group>"; };
+		85485FE42D23F6D2006B0BD8 /* Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
+		85485FE52D23F6D2006B0BD8 /* Tool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		855597782CE71EBF0072C7E1 /* QuMengSplashContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuMengSplashContainerViewController.h; sourceTree = "<group>"; };
+		855597792CE71EBF0072C7E1 /* QuMengSplashContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuMengSplashContainerViewController.m; sourceTree = "<group>"; };
+		85E1EA862D0848D300ED6C07 /* QuMengFeedSingleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuMengFeedSingleViewController.h; sourceTree = "<group>"; };
+		85E1EA872D0848D300ED6C07 /* QuMengFeedSingleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuMengFeedSingleViewController.m; sourceTree = "<group>"; };
+		85E1EA892D0848E100ED6C07 /* QuMengNativeSingleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuMengNativeSingleViewController.h; sourceTree = "<group>"; };
+		85E1EA8A2D0848E100ED6C07 /* QuMengNativeSingleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuMengNativeSingleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +152,8 @@
 		84036BFE2CA64FE600F94917 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				85E1EA862D0848D300ED6C07 /* QuMengFeedSingleViewController.h */,
+				85E1EA872D0848D300ED6C07 /* QuMengFeedSingleViewController.m */,
 				84036BFA2CA64FE600F94917 /* QuMengFeedAdCell.h */,
 				84036BFB2CA64FE600F94917 /* QuMengFeedAdCell.m */,
 				84036BFC2CA64FE600F94917 /* QuMengFeedDemoViewController.h */,
@@ -156,6 +174,8 @@
 		84036C0C2CA64FE600F94917 /* Native */ = {
 			isa = PBXGroup;
 			children = (
+				85E1EA892D0848E100ED6C07 /* QuMengNativeSingleViewController.h */,
+				85E1EA8A2D0848E100ED6C07 /* QuMengNativeSingleViewController.m */,
 				84036C022CA64FE600F94917 /* QuMengNativeAtlasImgeCell.h */,
 				84036C032CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m */,
 				84036C042CA64FE600F94917 /* QuMengNativeCell.h */,
@@ -182,6 +202,8 @@
 		84036C142CA64FE600F94917 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				855597782CE71EBF0072C7E1 /* QuMengSplashContainerViewController.h */,
+				855597792CE71EBF0072C7E1 /* QuMengSplashContainerViewController.m */,
 				84036C102CA64FE600F94917 /* QuMengSplashAdConf.h */,
 				84036C112CA64FE600F94917 /* QuMengSplashAdConf.m */,
 				84036C122CA64FE600F94917 /* QuMengSplashNativeView.h */,
@@ -248,9 +270,13 @@
 				84036C242CA64FE600F94917 /* bg@3x.png */,
 				84036C252CA64FE600F94917 /* LaunchScreenViewController.h */,
 				84036C262CA64FE600F94917 /* LaunchScreenViewController.m */,
+				84DF87A62E45D00F00102348 /* DelayedShowViewController.h */,
+				84DF87A72E45D00F00102348 /* DelayedShowViewController.m */,
 				84036C272CA64FE600F94917 /* qumeng_logo.png */,
 				84036C282CA64FE600F94917 /* ViewController.h */,
 				84036C292CA64FE600F94917 /* ViewController.m */,
+				85485FE42D23F6D2006B0BD8 /* Tool.h */,
+				85485FE52D23F6D2006B0BD8 /* Tool.m */,
 			);
 			name = QuMengDemoMain;
 			path = ../QuMengDemoMain;
@@ -268,6 +294,7 @@
 		84469FEC2B8345B100C2BED4 = {
 			isa = PBXGroup;
 			children = (
+				84755BA62D352410005F6F4A /* QuMengAdSDKDemo.entitlements */,
 				84036C2A2CA64FE600F94917 /* QuMengDemoMain */,
 				84469FF62B8345B100C2BED4 /* Products */,
 				EB41EA6CB58614D09791375E /* Pods */,
@@ -396,6 +423,9 @@
 				84036C2B2CA64FE600F94917 /* QuMengFeedAdCell.m in Sources */,
 				84036C2C2CA64FE600F94917 /* QuMengFeedDemoViewController.m in Sources */,
 				84036C372CA64FE600F94917 /* QuMengBaseNavigationController.m in Sources */,
+				8555977A2CE71EBF0072C7E1 /* QuMengSplashContainerViewController.m in Sources */,
+				85E1EA882D0848D300ED6C07 /* QuMengFeedSingleViewController.m in Sources */,
+				84DF87A82E45D00F00102348 /* DelayedShowViewController.m in Sources */,
 				84036C362CA64FE600F94917 /* QuMengBaseDemoViewController.m in Sources */,
 				84036C392CA64FE600F94917 /* UIColor+QuMengAD.m in Sources */,
 				84036C2F2CA64FE600F94917 /* QuMengNativeCell.m in Sources */,
@@ -406,9 +436,11 @@
 				84036C2D2CA64FE600F94917 /* QuMengInterstitialConf.m in Sources */,
 				84036CF52CA6830300F94917 /* UIInterface+QuMengRotation.m in Sources */,
 				84036C312CA64FE600F94917 /* QuMengNativeSingleImageCell.m in Sources */,
+				85485FE62D23F6D2006B0BD8 /* Tool.m in Sources */,
 				84036C3C2CA64FE600F94917 /* LaunchScreenViewController.m in Sources */,
 				84036C382CA64FE600F94917 /* MBProgressHUD+QuMengAD.m in Sources */,
 				84036C322CA64FE600F94917 /* QuMengNativeVideoCell.m in Sources */,
+				85E1EA8B2D0848E100ED6C07 /* QuMengNativeSingleViewController.m in Sources */,
 				84036C2E2CA64FE600F94917 /* QuMengNativeAtlasImgeCell.m in Sources */,
 				84036C3A2CA64FE600F94917 /* AppDelegate.m in Sources */,
 				84036C352CA64FE600F94917 /* QuMengSplashNativeView.m in Sources */,
@@ -549,6 +581,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0223.1700;
@@ -578,6 +611,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0223.1700;

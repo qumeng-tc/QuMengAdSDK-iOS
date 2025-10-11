@@ -9,12 +9,15 @@
 #import "QuMengNativeSingleImageCell.h"
 #import "QuMengNativeAtlasImgeCell.h"
 #import "QuMengNativeVideoCell.h"
-#import <QuMengAdSDK/QuMengAdSDK-Swift.h>
-@interface QuMengNativeDemoViewController ()<QuMengNativeAdDelegate, QuMengNativeAdRelatedViewDelegate>
+#import "ViewController.h"
 
-@property (nonatomic, strong) NSArray *nativeAds;
+#import <QuMengAdSDK/QuMengAdSDK.h>
 
-@property (nonatomic, strong) dispatch_semaphore_t lock;
+@interface QuMengNativeDemoViewController ()<QuMengNativeAdDelegate>
+
+@property (nonatomic, strong) NSMutableArray *nativeAds;
+@property (nonatomic, strong) dispatch_group_t completionGroup;
+
 
 @end
 
@@ -22,60 +25,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.lock = dispatch_semaphore_create(1);
-    NSMutableArray *array = [NSMutableArray array];
-    for (int i = 0; i < 16; i ++) {
-        [array addObject:[NSString stringWithFormat:@"Test Native AD: %d", i]];
-    }
-    self.sourceArray = [array copy];
-    
     [self.tableView registerClass:[QuMengNativeSingleImageCell class] forCellReuseIdentifier:@"QuMengNativeSingleImageCell"];
     [self.tableView registerClass:[QuMengNativeAtlasImgeCell class] forCellReuseIdentifier:@"QuMengNativeAtlasImgeCell"];
     [self.tableView registerClass:[QuMengNativeVideoCell class] forCellReuseIdentifier:@"QuMengNativeVideoCell"];
+    [self loadData:self.slot];
+}
+
+- (void)loadData:(NSString *)slotID  {
+    self.nativeAds = @[
+        [[QuMengNativeAd alloc] initWithSlot:slotID],
+        [[QuMengNativeAd alloc] initWithSlot:slotID],
+        [[QuMengNativeAd alloc] initWithSlot:slotID],
+        [[QuMengNativeAd alloc] initWithSlot:slotID]
+    ].mutableCopy;
     
-    NSMutableArray *nativeAds = [NSMutableArray array];
-    for (int i = 0; i < 4; i++) {
-        QuMengNativeAd *nativeAd = [[QuMengNativeAd alloc] initWithSlot:self.slot];
-        nativeAd.delegate = self;
-        [nativeAds addObject:nativeAd];
-    }
-    self.nativeAds = [nativeAds copy];
-    
+    _completionGroup = dispatch_group_create();
     for (QuMengNativeAd *nativeAd in self.nativeAds) {
+        dispatch_group_enter(_completionGroup);
+        nativeAd.delegate = self;
         [nativeAd loadAdData];
     }
-}
-
-// MARK: - QuMengNativeAdDelegate
-- (void)qumeng_nativeAdLoadSuccess:(QuMengNativeAd *)nativeAd {
     
-    dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER);
-    NSMutableArray *array = [self.sourceArray mutableCopy];
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
-    idx = idx * 4 + 1;
-    [array insertObject:nativeAd atIndex:idx];
-    self.sourceArray = [array copy];
-    [self.tableView reloadData];
-    dispatch_semaphore_signal(_lock);
-}
-
-- (void)qumeng_nativeAdLoadFail:(QuMengNativeAd *)nativeAd error:(NSError *)error {
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 请求失败",(long)idx + 1);
-}
-
-- (void)qumeng_nativeAdDidShow:(QuMengNativeAd *)nativeAd {
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 曝光",(long)idx + 1);
-}
-
-- (void)qumeng_nativeAdDidClick:(QuMengNativeAd *)nativeAd {
-    [MBProgressHUD showMessage:@"NativeAd: 点击"];
-}
-
-- (void)qumeng_nativeAdDidCloseOtherController:(QuMengNativeAd *)nativeAd {
-    [MBProgressHUD showMessage:@"NativeAd: 关闭落地页"];
+    __block NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < 16; i ++) {
+        [array addObject:[NSString stringWithFormat:@"Test Native AD: %d", i]];
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_group_notify(_completionGroup, dispatch_get_main_queue(), ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
+        for (QuMengNativeAd *nativeAd in self.nativeAds) {
+            nativeAd.delegate = strongSelf;
+            NSInteger idx = [strongSelf.nativeAds indexOfObject:nativeAd];
+            idx = idx * 4 + 1;
+            [array insertObject:nativeAd atIndex:idx];
+        }
+        strongSelf.sourceArray = array;
+        [strongSelf.tableView reloadData];
+    });
 }
 
 // MARK: - tableView Delegate
@@ -90,7 +79,6 @@
         } else if (nativeAd.meta.getMaterialType == 4) {
             QuMengNativeVideoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QuMengNativeVideoCell" forIndexPath:indexPath];
             [cell refreshWithData:nativeAd];
-            cell.nativeAd.relatedView.delegate = self;
             return cell;
         } else {
             QuMengNativeSingleImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QuMengNativeSingleImageCell" forIndexPath:indexPath];
@@ -121,31 +109,97 @@
     return 160;
 }
 
-/// 插屏广告视频播放开始
-- (void)qumeng_nativeAdRelatedViewDidStart:(QuMengNativeAdRelatedView *)nativeAdRelatedView {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAdRelatedView.nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 视频播放开始",(long)idx + 1);
 }
-/// 插屏广告视频播放暂停
-- (void)qumeng_nativeAdRelatedViewDidPause:(QuMengNativeAdRelatedView *)nativeAdRelatedView {
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAdRelatedView.nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 视频播放暂停",(long)idx + 1);
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
-/// 插屏广告视频播放继续
-- (void)qumeng_nativeAdRelatedViewDidResume:(QuMengNativeAdRelatedView *)nativeAdRelatedView {
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAdRelatedView.nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 视频播放继续",(long)idx + 1);
+
+// MARK: - QuMengNativeAdDelegate
+/// 自渲染广告加载成功
+- (void)qumeng_nativeAdLoadSuccess:(QuMengNativeAd *)nativeAd {
+    // 检查广告有效性
+    if (checkAdValid()) {
+        [nativeAd isValid];
+    }
+    
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 请求成功",(long)idx + 1);
+    NSDictionary *auctionInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"setAuctionInfo"];
+    QuMengLog(@"【媒体】自渲染: 竞价信息 %@", auctionInfo);
+    
+    NSString *channel = auctionInfo[@"channel"];
+    NSString *price = auctionInfo[@"price"];
+    if (nativeAd.meta.getECPM >= price.integerValue) {
+        QuMengLog(@"【媒体】自渲染: 趣盟竞价成功，趣盟价格：%ld", (long)nativeAd.meta.getECPM);
+        [nativeAd winNotice:price.integerValue];
+    } else {
+        QuMengLog(@"【媒体】自渲染: 趣盟竞价失败，趣盟价格：%ld", (long)nativeAd.meta.getECPM);
+        [nativeAd lossNotice:price.integerValue lossReason:QMLossReasonBaseFilter winBidder:channel];
+        [self.nativeAds removeObject: nativeAd];
+    }    
+    
+    dispatch_group_leave(_completionGroup);
 }
-/// 插屏广告视频播放完成
-- (void)qumeng_nativeAdRelatedViewDidPlayComplection:(QuMengNativeAdRelatedView *)nativeAdRelatedView {
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAdRelatedView.nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 视频播放完成",(long)idx + 1);
+
+/// 自渲染广告加载失败
+- (void)qumeng_nativeAdLoadFail:(QuMengNativeAd *)nativeAd error:(NSError *)error {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 请求失败",(long)idx + 1);
+    [self.nativeAds removeObject:nativeAd];
+    dispatch_group_leave(_completionGroup);
 }
-/// 插屏广告视频播放异常
-- (void)qumeng_nativeAdRelatedViewDidPlayFinished:(QuMengNativeAdRelatedView *)nativeAdRelatedView didFailWithError:(NSError *)error {
-    NSInteger idx = [self.nativeAds indexOfObject:nativeAdRelatedView.nativeAd];
-    NSLog(@"【媒体】自渲染%ld: 视频播放结束",(long)idx + 1);
+
+
+- (void)qumeng_nativeAdDidShow:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 曝光",(long)idx + 1);
+    [MBProgressHUD showMessage:@"NativeAd: 曝光"];
+}
+
+- (void)qumeng_nativeAdDidClick:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 点击",(long)idx + 1);
+    [MBProgressHUD showMessage:@"NativeAd: 点击"];
+}
+
+- (void)qumeng_nativeAdDidCloseOtherController:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 关闭落地页",(long)idx + 1);
+    [MBProgressHUD showMessage:@"NativeAd: 关闭落地页"];
+}
+
+/// 自渲染视频播放开始
+- (void)qumeng_nativeAdDidStart:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 视频播放开始",(long)idx + 1);
+}
+
+/// 自渲染视频播放暂停
+- (void)qumeng_nativeAdDidPause:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 视频播放暂停",(long)idx + 1);
+}
+
+/// 自渲染视频播放继续
+- (void)qumeng_nativeAdDidResume:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 视频播放继续",(long)idx + 1);
+}
+
+/// 自渲染视频播放完成
+- (void)qumeng_nativeAdVideoDidPlayComplection:(QuMengNativeAd *)nativeAd {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 视频播放完成",(long)idx + 1);
+
+}
+
+/// 自渲染视频播放异常
+- (void)qumeng_nativeAdVideoDidPlayFinished:(QuMengNativeAd *)nativeAd didFailWithError:(NSError *)error {
+    NSInteger idx = [self.nativeAds indexOfObject:nativeAd];
+    QuMengLog(@"【媒体】自渲染%ld: 视频播放结束",(long)idx + 1);
 }
 
 @end

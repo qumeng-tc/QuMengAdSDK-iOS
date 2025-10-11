@@ -1,4 +1,0 @@
-framework module QuMengAdSDK {
-  header "QuMengAdSDK-Swift.h"
-  requires objc
-}

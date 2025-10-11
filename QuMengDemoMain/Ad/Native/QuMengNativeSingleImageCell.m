@@ -6,8 +6,10 @@
 //
 
 #import "QuMengNativeSingleImageCell.h"
-#import <Masonry.h>
-#import <UIImageView+YYWebImage.h>
+
+#import <QuMengAdSDK/QuMengAdSDK.h>
+#import <Masonry/Masonry.h>
+#import <YYWebImage/UIImageView+YYWebImage.h>
 
 @interface QuMengNativeSingleImageCell ()
 
@@ -29,9 +31,12 @@
         
         __weak typeof(self) weakSelf = self;
         [self.coverImg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(weakSelf.contentView);
-            make.top.equalTo(weakSelf.contentView).offset(30);
-            make.bottom.equalTo(weakSelf.contentView).offset(-35);
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (!strongSelf) return;
+            
+            make.left.right.equalTo(strongSelf.contentView);
+            make.top.equalTo(strongSelf.contentView).offset(30);
+            make.bottom.equalTo(strongSelf.contentView).offset(-35);
         }];
     }
     return self;

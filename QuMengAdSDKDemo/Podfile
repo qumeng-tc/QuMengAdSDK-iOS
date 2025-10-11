@@ -8,8 +8,6 @@ target 'QuMengAdSDKDemo' do
   
   pod 'Masonry'
   pod 'MBProgressHUD'
-  pod 'DoraemonKit'
-  pod 'DoraemonKit'
   pod 'YYWebImage'
 end
 

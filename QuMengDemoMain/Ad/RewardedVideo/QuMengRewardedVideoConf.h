@@ -6,13 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuMengAdSDK/QuMengAdSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QuMengRewardedVideoConf : NSObject
 
 @property (nonatomic, copy) NSString *slot;
-@property (nonatomic, strong) QMRetentionAlertInfo *info;
+@property (nonatomic, strong) QuMengRetentionAlertInfo *info;
 
 @end
 

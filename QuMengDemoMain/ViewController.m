@@ -5,20 +5,34 @@
 //  Created by qusy on 2023/12/29.
 //
 
-#import <Masonry.h>
-
 #import "ViewController.h"
+
+#import <Masonry/Masonry.h>
+#import <QuMengAdSDK/QuMengAdSDK.h>
+
+#import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "QuMengBaseConf.h"
-#import "AppDelegate.h"
-#import <CoreMotion/CoreMotion.h>
-#import "UIInterface+QuMengRotation.h"
-#import <QuMengAdSDK/QuMengAdSDK-Swift.h>
 #import "QuMengRewardedVideoConf.h"
 #import "QuMengFeedDemoViewController.h"
+#import "DelayedShowViewController.h"
+
+#import "UIInterface+QuMengRotation.h"
 
 static NSString *__customBottomViewIsOpen = @"自定义底部视图";
 static NSString *__adClickToCloseAutomatically = @"广告点击关闭自动关闭";
+static NSString *__adSplashWindow = @"开屏 window 展示";
+static NSString *__nativeAdShowSlide = @"自渲染滑一滑";
+static NSString *__donotSetupSDK = @"不初始化 SDK 重启生效";
+static NSString *__twistDisabled = @"不开启摇一摇/扭一扭";
+static NSString *__checkAdValid = @"检查广告有效性";
+static NSString *__checkEnablePersonalAds = @"个性化推荐";
+
+bool adSplashWindow(void) {
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__adSplashWindow];
+    return [value boolValue];
+}
+
 bool customBottomViewIsOpen(void) {
     NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__customBottomViewIsOpen];
     return [value boolValue];
@@ -26,6 +40,31 @@ bool customBottomViewIsOpen(void) {
 
 bool adClickToCloseAutomatically(void) {
     NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__adClickToCloseAutomatically];
+    return [value boolValue];
+}
+
+BOOL nativeAdShowSlide(void) {
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__nativeAdShowSlide];
+    return [value boolValue];
+}
+
+BOOL donotSetupSDK(void) {
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__donotSetupSDK];
+    return [value boolValue];
+}
+
+BOOL twistDisabled(void) {
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__twistDisabled];
+    return [value boolValue];
+}
+
+BOOL checkAdValid(void) {
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__checkAdValid];
+    return [value boolValue];
+}
+
+BOOL checkEnablePersonalAds(void) {
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:__checkEnablePersonalAds];
     return [value boolValue];
 }
 
@@ -67,8 +106,8 @@ bool adClickToCloseAutomatically(void) {
     UIInterfaceOrientationMask currentVCInterfaceOrientationMask;
 }
 
-@property (nonatomic, strong) id<QuMengBaseConf> conf;
-@property (nonatomic, strong) QMRetentionAlertInfo *alertInfo;
+@property (nonatomic, strong) NSMutableArray<id<QuMengBaseConf>> *confs;
+@property (nonatomic, strong) QuMengRetentionAlertInfo *alertInfo;
 
 @property (nonatomic, assign) CGSize feedSize;
 
@@ -83,6 +122,7 @@ bool adClickToCloseAutomatically(void) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"趣盟";
+    _confs = @[].mutableCopy;
     [UIApplication sharedApplication].statusBarHidden = [[NSUserDefaults standardUserDefaults] boolForKey:@"status_bar_hidden"];;
     [self unlockRotation: @{}];
     
@@ -99,8 +139,11 @@ bool adClickToCloseAutomatically(void) {
     
     __weak typeof(self) weakSelf = self;
     [infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.view).offset(-44);
-        make.centerX.equalTo(weakSelf.view);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
+        make.bottom.equalTo(strongSelf.view).offset(-44);
+        make.centerX.equalTo(strongSelf.view);
     }];
     
     self.sourceArray = @[
@@ -114,19 +157,9 @@ bool adClickToCloseAutomatically(void) {
                    @"action": @"锁定竖屏",
                    @"SEL": NSStringFromSelector(@selector(performVerticalRotation:))
                },
-               
                @{
                    @"action": @"解除锁定",
                    @"SEL": NSStringFromSelector(@selector(unlockRotation:))
-               },
-               
-               @{
-                   @"action": __customBottomViewIsOpen,
-                   @"isShowSwitch": @(YES),
-               },
-               @{
-                   @"action": __adClickToCloseAutomatically,
-                   @"isShowSwitch": @(YES),
                },
                @{
                    @"action": @"清除缓存",
@@ -137,22 +170,50 @@ bool adClickToCloseAutomatically(void) {
                    @"SEL": NSStringFromSelector(@selector(addCache:))
                },
                @{
+                   @"action": @"设置竞价信息",
+                   @"SEL": NSStringFromSelector(@selector(setAuctionInfo:))
+               },
+               @{
                    @"action": @"显示/隐藏状态栏",
                    @"SEL": NSStringFromSelector(@selector(hideStatusBar:))
                },
                @{
-                   @"action": @"自定义挽留弹窗",
-                   @"SEL": NSStringFromSelector(@selector(customRetentionInfo:))
-               },               
+                   @"action": @"延迟显示",
+                   @"SEL": NSStringFromSelector(@selector(delayedDisplay:))
+               },
                @{
-                   @"action": @"信息流自定义尺寸",
-                   @"SEL": NSStringFromSelector(@selector(setFeedCustomSize:))
+                   @"action": __adClickToCloseAutomatically,
+                   @"isShowSwitch": @(YES),
+               },
+               @{
+                   @"action": __donotSetupSDK,
+                   @"isShowSwitch": @(YES),
+               },
+               @{
+                   @"action": __twistDisabled,
+                   @"isShowSwitch": @(YES),
+               },
+               @{
+                   @"action": __checkAdValid,
+                   @"isShowSwitch": @(YES),
+               },
+               @{
+                   @"action": __checkEnablePersonalAds,
+                   @"isShowSwitch": @(YES),
                }
            ]
         },
         
         @{ @"title": @"广告: 开屏",
            @"list": @[
+               @{
+                   @"action": __customBottomViewIsOpen,
+                   @"isShowSwitch": @(YES),
+               },
+               @{
+                   @"action": __adSplashWindow,
+                   @"isShowSwitch": @(YES),
+               },
                @{
                    @"action": @"开屏-横版图片",
                    @"slot": @"9016239",
@@ -175,12 +236,6 @@ bool adClickToCloseAutomatically(void) {
                    @"action": @"开屏-竖版视频",
                    @"slot": @"9016243",
                    @"conf" : @"QuMengSplashAdConf",
-                   @"SEL": NSStringFromSelector(@selector(splashAdAction:))
-               },
-               @{
-                   @"action": @"开屏-自渲染",
-                   @"slot": @"9014846",
-                   @"conf" : @"QMSplashCustomAdConf",
                    @"SEL": NSStringFromSelector(@selector(splashAdAction:))
                }
            ]
@@ -217,6 +272,10 @@ bool adClickToCloseAutomatically(void) {
         @{ @"title": @"广告: 激励视频",
            @"list": @[
                @{
+                   @"action": @"自定义挽留弹窗",
+                   @"SEL": NSStringFromSelector(@selector(customRetentionInfo:))
+               },
+               @{
                    @"action":
                        @"激励视频-横版视频",
                    @"slot": @"9016247",
@@ -233,6 +292,10 @@ bool adClickToCloseAutomatically(void) {
         },
         @{ @"title": @"广告: 信息流",
            @"list": @[
+               @{
+                   @"action": @"信息流自定义尺寸",
+                   @"SEL": NSStringFromSelector(@selector(setFeedCustomSize:))
+               },
                @{
                    @"action": @"大图",
                    @"slot": @"9014850",
@@ -262,11 +325,27 @@ bool adClickToCloseAutomatically(void) {
                    @"slot": @"9014859",
                    @"controller": @"QuMengFeedDemoViewController",
                    @"SEL": NSStringFromSelector(@selector(performCustomJump:))
+               },
+               @{
+                   @"action": @"图片非列表",
+                   @"slot": @"9014850",
+                   @"controller": @"QuMengFeedSingleViewController",
+                   @"SEL": NSStringFromSelector(@selector(performCustomJump:))
+               },
+               @{
+                   @"action": @"视频非列表",
+                   @"slot": @"9014853",
+                   @"controller": @"QuMengFeedSingleViewController",
+                   @"SEL": NSStringFromSelector(@selector(performCustomJump:))
                }
            ]
         },
         @{ @"title": @"广告: 自渲染",
            @"list": @[
+               @{
+                   @"action": __nativeAdShowSlide,
+                   @"isShowSwitch": @(YES),
+               },
                @{
                    @"action": @"大图",
                    @"slot": @"9014850",
@@ -290,13 +369,27 @@ bool adClickToCloseAutomatically(void) {
                    @"slot": @"9014853",
                    @"controller": @"QuMengNativeDemoViewController",
                    @"SEL": NSStringFromSelector(@selector(performCustomJump:))
+               },
+               @{
+                   @"action": @"图片非列表",
+                   @"slot": @"9014850",
+                   @"controller": @"QuMengNativeSingleViewController",
+                   @"SEL": NSStringFromSelector(@selector(performCustomJump:))
+               },
+               @{
+                   @"action": @"视频非列表",
+                   @"slot": @"9014853",
+                   @"controller": @"QuMengNativeSingleViewController",
+                   @"SEL": NSStringFromSelector(@selector(performCustomJump:))
                }
+               
            ]
         }
     ];
     [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delayedAction:) name:@"delayed_show" object:nil];
 }
-
 - (void)performHorizontalRotation:(NSDictionary *)params {
     [self qumeng_rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
     currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskLandscape;
@@ -322,7 +415,6 @@ bool adClickToCloseAutomatically(void) {
     [[NSUserDefaults standardUserDefaults] setObject:@(isOn) forKey: key];
 }
 
-// 栏位跳转
 - (void)splashAdAction:(NSDictionary *)params {
     [[NSUserDefaults standardUserDefaults] setObject:params forKey: @"splashAdAction"];
     [self performSlotJump:params];
@@ -332,13 +424,14 @@ bool adClickToCloseAutomatically(void) {
 - (void)performSlotJump:(NSDictionary *)params {
     NSString *className = params[@"conf"];
     Class class = NSClassFromString(className);
-    _conf = [[class alloc] init];
+    id _conf = [[class alloc] init];
     
     if ([className isEqualToString:@"QuMengRewardedVideoConf"]) {
         QuMengRewardedVideoConf *conf = (QuMengRewardedVideoConf *)_conf;
         conf.info = self.alertInfo;
     }
     [_conf qumeng_loadAd:params];
+    [_confs addObject:_conf];
 }
 
 // 信息流，自渲染
@@ -372,7 +465,7 @@ bool adClickToCloseAutomatically(void) {
             }
         }
     }]];
-
+    
     [alertController addAction:[UIAlertAction actionWithTitle:@"清除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UITextField *keyTextField = alertController.textFields.firstObject;
         if (keyTextField.text.length == 0) {
@@ -396,6 +489,25 @@ bool adClickToCloseAutomatically(void) {
     [[NSUserDefaults standardUserDefaults] setBool:[UIApplication sharedApplication].statusBarHidden forKey:@"status_bar_hidden"];
 }
 
+// 延迟显示
+- (void)delayedDisplay:(NSDictionary *)params {
+    DelayedShowViewController *delayedShowViewController = [[DelayedShowViewController alloc] init];
+    [self.navigationController pushViewController:delayedShowViewController animated:YES];
+}
+
+- (void)delayedAction:(NSNotification *)notification {
+    NSDictionary *adInfo = notification.object;
+    NSInteger delayed = [adInfo[@"delayed"] intValue];
+    __weak typeof(self) weakSelf = self;
+    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayed * NSEC_PER_SEC));
+    dispatch_after(delay, dispatch_get_main_queue(), ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
+        [strongSelf performSlotJump:adInfo];
+    });
+}
+
 // 自定义挽留弹窗
 - (void)customRetentionInfo:(NSDictionary *)params {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请输入自定义内容" preferredStyle:UIAlertControllerStyleAlert];
@@ -403,23 +515,26 @@ bool adClickToCloseAutomatically(void) {
     
     __weak typeof(self) weakSelf = self;
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
         UITextField *titleTextField = alertController.textFields[0];
         UITextField *bodyTextField = alertController.textFields[1];
         UITextField *confirmTextField = alertController.textFields[2];
         UITextField *cancelTextField = alertController.textFields[3];
         
-        weakSelf.alertInfo = [[QMRetentionAlertInfo alloc] init];
+        strongSelf.alertInfo = [[QuMengRetentionAlertInfo alloc] init];
         if (titleTextField.text.length > 0) {
-            weakSelf.alertInfo.messageTitle = titleTextField.text;
+            strongSelf.alertInfo.messageTitle = titleTextField.text;
         }
         if (bodyTextField.text.length > 0) {
-            weakSelf.alertInfo.messageBody = bodyTextField.text;
+            strongSelf.alertInfo.messageBody = bodyTextField.text;
         }
         if (confirmTextField.text.length > 0) {
-            weakSelf.alertInfo.confirmButtonText = confirmTextField.text;
+            strongSelf.alertInfo.confirmButtonText = confirmTextField.text;
         }
         if (cancelTextField.text.length > 0) {
-            weakSelf.alertInfo.cancelButtonText = cancelTextField.text;
+            strongSelf.alertInfo.cancelButtonText = cancelTextField.text;
         }
     }]];
     
@@ -439,29 +554,64 @@ bool adClickToCloseAutomatically(void) {
     [self presentViewController:alertController animated:true completion:nil];
 }
 
+// 设置竞价信息
+- (void)setAuctionInfo:(NSDictionary *)params {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请输入竞价信息" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField01 = alertController.textFields[0];
+        UITextField *textField02 = alertController.textFields[1];
+        [[NSUserDefaults standardUserDefaults] setObject:@{
+            @"price": textField01.text,
+            @"channel": textField02.text,
+        } forKey: @"setAuctionInfo"];
+    }]];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入广告价格";
+    }];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入渠道渠道（csj、gdt、kuaishou、baidu、qumeng、other）";
+    }];
+    
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
 - (void)setFeedCustomSize:(NSDictionary *)params {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请输入信息流尺寸" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
     
     __weak typeof(self) weakSelf = self;
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
         UITextField *widthTextField = alertController.textFields[0];
         UITextField *heightTextField = alertController.textFields[1];
         CGFloat widht = widthTextField.text.intValue ?: 0;
         CGFloat height = heightTextField.text.intValue ?: 0;
-        weakSelf.feedSize = CGSizeMake(widht, height);
+        strongSelf.feedSize = CGSizeMake(widht, height);
     }]];
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
         textField.placeholder =  @"请输入width（默认0）";
-        if (weakSelf.feedSize.width > 0) {
-            textField.text = [NSString stringWithFormat:@"%f", weakSelf.feedSize.width];
+        if (strongSelf.feedSize.width > 0) {
+            textField.text = [NSString stringWithFormat:@"%f", strongSelf.feedSize.width];
         }
     }];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        
         textField.placeholder = @"请输入height（默认0）";
-        if (weakSelf.feedSize.height > 0) {
-            textField.text = [NSString stringWithFormat:@"%f", weakSelf.feedSize.height];
+        if (strongSelf.feedSize.height > 0) {
+            textField.text = [NSString stringWithFormat:@"%f", strongSelf.feedSize.height];
         }
     }];
     
@@ -521,16 +671,16 @@ bool adClickToCloseAutomatically(void) {
     cell.detailTextLabel.textColor = UIColor.blackColor;
     cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
     
-    
     cell.switchControl.hidden = ![item[@"isShowSwitch"] isEqual:@(YES)];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:actionTitle];
     cell.switchControl.on = value.boolValue;
     cell.switchValueChangedHandler = ^(BOOL isOn) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(isOn) forKey: actionTitle];
+        [[NSUserDefaults standardUserDefaults] setObject:@(isOn) forKey:actionTitle];
         [[NSUserDefaults standardUserDefaults] synchronize];
     };
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *ad = self.sourceArray[indexPath.section];
@@ -554,7 +704,6 @@ bool adClickToCloseAutomatically(void) {
     return list.count;
 }
 
-
 void PMP(NSObject *object, SEL selector, NSDictionary *param) {
     // Get method signature
     NSMethodSignature *methodSignature = [object methodSignatureForSelector:selector];
@@ -573,11 +722,10 @@ void PMP(NSObject *object, SEL selector, NSDictionary *param) {
     return YES;
 }
 
-
 // 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return currentVCInterfaceOrientationMask;
 }
 
-
 @end
+
