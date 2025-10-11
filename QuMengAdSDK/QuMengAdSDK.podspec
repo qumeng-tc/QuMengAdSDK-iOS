@@ -1,3 +1,11 @@
+#
+# Be sure to run `pod lib lint QuMengAdSDK-iOS.podspec' to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
+#
+
 Pod::Spec.new do |s|
   s.name                  = 'QuMengAdSDK'
   s.version               = '1.3.7'
@@ -18,7 +26,7 @@ Pod::Spec.new do |s|
   s.swift_version         = '5.1'
   s.platform              = :ios, "11.0"
 
-  s.vendored_frameworks = '*.{xcframework,framework}'
+  s.vendored_frameworks = 'QuMengAdSDK/QuMengAdSDK.xcframework'
   s.xcconfig = { 'ENABLE_BITCODE' => 'NO', 'OTHER_LDFLAGS' =>'-ObjC'}
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
