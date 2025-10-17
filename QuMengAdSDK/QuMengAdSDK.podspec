@@ -1,34 +1,26 @@
-#
-# Be sure to run `pod lib lint QuMengAdSDK-iOS.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
-  s.name                  = 'QuMengAdSDK'
-  s.version               = '1.3.7'
-  s.summary               = 'QuMengAdSDK-iOS.'
-  s.description           = '趣盟平台'
+  s.name             = 'QuMengAdSDK'
+  s.version          = '1.3.7.53'
+  s.summary          = 'QuMengAdSDK  includes three graphic ads, group ads, graphic ads, banner ads, Video ads and Launch ads.'
+  s.description      = '趣盟'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'qushiyu' => 'qushiyu@qutoutiao.net' }
+  s.source           = { :git => 'git@git.qutoutiao.net:CPC/qmios.git', :tag => s.version.to_s }
+  s.homepage         = 'https://git.qutoutiao.net/CPC/qmios'
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.homepage              = 'https://github.com/qumeng-tc/QuMengAdSDK-iOS'
-
-  s.license               = { :type => 'MIT', :file => 'LICENSE' }
-  s.author                = { 'chenxin02' => 'chenxin02@qutoutiao.net' }
-  s.source                = { :git => "https://github.com/qumeng-tc/QuMengAdSDK-iOS.git" }
-
-  s.frameworks            = 'UIKit', 'CoreLocation', 'SystemConfiguration', 'CoreGraphics', 'CoreMotion', 'CoreTelephony', 'AdSupport', 'QuartzCore', 'WebKit', 'MessageUI', 'SafariServices', 'AVFoundation', 'EventKit', 'CoreMedia', 'StoreKit'
-#  s.libraries             = 'c++'
-#  s.resource              = 'QMAdBundle.bundle'
-
-  s.ios.deployment_target = '11.0'
-  s.swift_version         = '5.1'
-  s.platform              = :ios, "11.0"
-
-  s.vendored_frameworks = 'QuMengAdSDK/QuMengAdSDK.xcframework'
+  s.ios.deployment_target = '11.0'                  #支持的平台和版本号
+  s.swift_version = '5.1'
   s.xcconfig = { 'ENABLE_BITCODE' => 'NO', 'OTHER_LDFLAGS' =>'-ObjC'}
-  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  
+  s.vendored_frameworks = '*.{xcframework,framework}'
+  
+  s.weak_frameworks = 'AdSupport', 'AppTrackingTransparency', 'WebKit'
+  s.frameworks = 'StoreKit', 'SystemConfiguration', 'CoreTelephony', 'AVKit', 'AVFoundation', 'CoreMedia', 'DeviceCheck', 'CoreMotion'
 
+  s.requires_arc = true
+  s.static_framework = true
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  
+  
 end
