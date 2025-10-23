@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'QuMengAdSDK'
-  s.version          = '1.3.7.53'
+  s.version          = '1.3.7.56'
   s.summary          = 'QuMengAdSDK  includes three graphic ads, group ads, graphic ads, banner ads, Video ads and Launch ads.'
   s.description      = '趣盟'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
